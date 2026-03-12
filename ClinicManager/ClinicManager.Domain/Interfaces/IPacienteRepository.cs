@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ClinicManager.Domain.Entities;
+using System;
+using ClinicManager.Domain.Entities;
 
 namespace ClinicManager.Domain.Interfaces
 {
     public interface IPacienteRepository
     {
+        IEnumerable<Paciente> ListarTodos();
     }
 }

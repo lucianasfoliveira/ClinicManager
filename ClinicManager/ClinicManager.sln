@@ -6,10 +6,17 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClinicManager.Web", "ClinicManager.Web\ClinicManager.Web.csproj", "{E0674776-7349-4C2C-A094-C593A74405FA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClinicManager.Application", "ClinicManager.Application\ClinicManager.Application.csproj", "{DDAF1D5F-A29B-432C-905C-12159FF0D80F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D4239F75-A094-475B-8D67-161553B85091} = {D4239F75-A094-475B-8D67-161553B85091}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClinicManager.Infra", "ClinicManager.Infra\ClinicManager.Infra.csproj", "{F2418DD7-4CC7-46D1-BE6F-A2FBFD1FA2E7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClinicManager.Domain", "ClinicManager.Domain\ClinicManager.Domain.csproj", "{D4239F75-A094-475B-8D67-161553B85091}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01-src", "01-src", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02-database", "02-database", "{AC6C6654-2C4D-446F-83D0-CFC5BCDEEEEF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,6 +43,12 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E0674776-7349-4C2C-A094-C593A74405FA} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{DDAF1D5F-A29B-432C-905C-12159FF0D80F} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{F2418DD7-4CC7-46D1-BE6F-A2FBFD1FA2E7} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{D4239F75-A094-475B-8D67-161553B85091} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EA3A3ECB-A5A8-43F9-988C-AC960428A467}

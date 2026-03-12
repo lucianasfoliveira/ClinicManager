@@ -6,4 +6,10 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ClinicManager.Application\ClinicManager.Application.csproj" />
+    <ProjectReference Include="..\ClinicManager.Domain\ClinicManager.Domain.csproj" />
+    <ProjectReference Include="..\ClinicManager.Infra\ClinicManager.Infra.csproj" />
+  </ItemGroup>
+
 </Project>
