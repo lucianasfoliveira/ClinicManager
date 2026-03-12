@@ -1,0 +1,26 @@
+﻿@model IEnumerable<ClinicManager.Application.ViewModel.PacienteViewModel>
+
+<h2>Lista de Pacientes</h2>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>CPF</th>
+            <th>Telefone</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var paciente in Model)
+        {
+            <tr>
+                <td>@paciente.Nome</td>
+                <td>@paciente.CPF</td>
+                <td>@paciente.Telefone</td>
+                <td>@paciente.Email</td>
+            </tr>
+        }
+    </tbody>
+</table>

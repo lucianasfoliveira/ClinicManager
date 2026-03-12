@@ -1,14 +1,19 @@
-using ClinicManager.Application.AppService;
-using ClinicManager.Application.Interfaces.AppService;
-using ClinicManager.Application.Interfaces.Service;
-using ClinicManager.Application.Service;
+using System.Data;
+using Microsoft.Data.SqlClient;
 using ClinicManager.Domain.Interfaces;
 using ClinicManager.Infra.Repositories;
+using ClinicManager.Application.Interfaces.Service;
+using ClinicManager.Application.Service;
+using ClinicManager.Application.Interfaces.AppService;
+using ClinicManager.Application.AppService;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<IDbConnection>(sp =>
+    new SqlConnection(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Injeção de dependência
 builder.Services.AddScoped<IPacienteRepository, PacienteRepository>();

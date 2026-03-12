@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="6.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ClinicManager.Application\ClinicManager.Application.csproj" />
     <ProjectReference Include="..\ClinicManager.Domain\ClinicManager.Domain.csproj" />
     <ProjectReference Include="..\ClinicManager.Infra\ClinicManager.Infra.csproj" />
