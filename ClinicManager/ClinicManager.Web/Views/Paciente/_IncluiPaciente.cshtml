@@ -1,6 +1,7 @@
 ﻿@model ClinicManager.Application.ViewModel.PacienteViewModel
 
-<form asp-action="IncluiPaciente" asp-controller="Paciente" method="post">
+<form id="formPaciente" asp-action="SalvarPaciente" method="post">
+
     <div class="mb-3">
         <label asp-for="Nome"></label>
         <input asp-for="Nome" class="form-control" />

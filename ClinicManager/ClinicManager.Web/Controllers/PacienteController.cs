@@ -26,7 +26,7 @@ namespace ClinicManager.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult IncluiPaciente(PacienteViewModel model)
+        public IActionResult SalvarPaciente(PacienteViewModel model)
         {
             if (!ModelState.IsValid)
                 return PartialView("_IncluiPaciente", model);
