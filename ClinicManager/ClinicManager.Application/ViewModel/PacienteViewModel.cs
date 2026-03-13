@@ -24,6 +24,19 @@ namespace ClinicManager.Application.ViewModel
         public string Email { get; set; }
 
         public DateTime DtCadastro { get; set; }
+        public int Idade
+        {
+            get
+            {
+                var hoje = DateTime.Today;
+                var idade = hoje.Year - DtNascimento.Year;
+
+                if (DtNascimento.Date > hoje.AddYears(-idade))
+                    idade--;
+
+                return idade;
+            }
+        }
 
     }
 }
