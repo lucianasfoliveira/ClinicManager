@@ -1,17 +1,24 @@
 ﻿@model IEnumerable<ClinicManager.Application.ViewModel.PacienteViewModel>
 
+@* Título da página *@
 <h2>Lista de Pacientes</h2>
 
-<table border="1">
-    <thead>
+@* Botão de inclusão *@
+<a class="btn btn-primary mb-3" id="btnIncluir">
+    <i class="bi bi-plus-lg"></i> Novo Paciente
+</a>
+
+@* Tabela estilizada com Bootstrap *@
+<table class="table table-striped table-bordered">
+    <thead class="table-dark">
         <tr>
             <th>Nome</th>
             <th>CPF</th>
             <th>Telefone</th>
             <th>Email</th>
+            <th>Ações</th>
         </tr>
     </thead>
-
     <tbody>
         @foreach (var paciente in Model)
         {
@@ -20,7 +27,38 @@
                 <td>@paciente.CPF</td>
                 <td>@paciente.Telefone</td>
                 <td>@paciente.Email</td>
+                <td>
+                    @* Dropdown de ações *@
+                    <div class="dropdown">
+                        <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton-@paciente.Id" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-three-dots-vertical"></i>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton-@paciente.Id">
+                            <li><a class="dropdown-item" href="#">Editar</a></li>
+                            <li><a class="dropdown-item" href="#">Excluir</a></li>
+                        </ul>
+                    </div>
+                </td>
             </tr>
         }
     </tbody>
 </table>
+
+@* Opcional: Modal de inclusão/alteração (abre ao clicar no botão ou editar) *@
+<div class="modal fade" id="modalFormPaciente" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Incluir / Alterar Paciente</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                @* Aqui você colocaria o formulário do paciente *@
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-success">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>
