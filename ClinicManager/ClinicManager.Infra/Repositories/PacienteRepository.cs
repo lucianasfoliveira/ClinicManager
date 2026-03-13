@@ -21,5 +21,16 @@ namespace ClinicManager.Infra.Repositories
 
             return _connection.Query<Paciente>(sql);
         }
+
+        public void IncluiPaciente(Paciente paciente)
+        {
+            var sql = @"INSERT INTO Paciente
+                    (NOME, CPF, DTNASCIMENTO, TELEFONE, EMAIL, DTCADASTRO)
+                    VALUES
+                    (@NOME, @CPF, @DTNASCIMENTO, @TELEFONE, @EMAIL, @DTCADASTRO)";
+
+            _connection.Execute(sql, paciente);
+        }
+
     }
 }

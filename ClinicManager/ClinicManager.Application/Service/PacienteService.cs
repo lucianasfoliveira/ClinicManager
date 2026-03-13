@@ -17,5 +17,10 @@ namespace ClinicManager.Application.Service
         {
             return _pacienteRepository.ListarTodos();
         }
+
+        public void IncluiPaciente(Paciente paciente)
+        {
+            _pacienteRepository.IncluiPaciente(paciente);
+        }
     }
 }

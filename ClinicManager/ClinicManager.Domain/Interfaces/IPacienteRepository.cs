@@ -7,5 +7,6 @@ namespace ClinicManager.Domain.Interfaces
     public interface IPacienteRepository
     {
         IEnumerable<Paciente> ListarTodos();
+        void IncluiPaciente(Paciente paciente);
     }
 }

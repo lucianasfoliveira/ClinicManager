@@ -1,7 +1,8 @@
-﻿using ClinicManager.Application.Interfaces.AppService;
+﻿using AutoMapper;
+using ClinicManager.Application.Interfaces.AppService;
 using ClinicManager.Application.Interfaces.Service;
 using ClinicManager.Application.ViewModel;
-using AutoMapper;
+using ClinicManager.Domain.Entities;
 
 
 namespace ClinicManager.Application.AppService
@@ -21,6 +22,14 @@ namespace ClinicManager.Application.AppService
         {
             var pacientes = _pacienteService.ListarTodos();
             return _mapper.Map<IEnumerable<PacienteViewModel>>(pacientes);
+        }
+
+        public void IncluiPaciente(PacienteViewModel model)
+        {
+            var paciente = _mapper.Map<Paciente>(model);
+
+            paciente.DTCADASTRO = DateTime.Now;
+            _pacienteService.IncluiPaciente(paciente);
         }
     }
 }
