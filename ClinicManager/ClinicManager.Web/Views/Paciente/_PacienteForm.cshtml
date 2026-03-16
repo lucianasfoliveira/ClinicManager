@@ -1,0 +1,62 @@
+﻿@model ClinicManager.Application.ViewModel.PacienteViewModel
+
+<div id="alertPaciente" class="alert alert-danger alert-dismissible fade show d-none">
+    <span id="msgPaciente"></span>
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+</div>
+
+<form id="formPaciente" asp-action="Salvar" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="Nome"></label> <span class="text-danger">*</span>
+        <input asp-for="Nome" class="form-control" readonly="@(Model.Id > 0)" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="DtNascimento"></label> <span class="text-danger">*</span>
+        <input asp-for="DtNascimento" type="date" class="form-control" max="@DateTime.Now.ToString("yyyy-MM-dd")" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="CPF"></label> <span class="text-danger">*</span>
+        <input asp-for="CPF" class="form-control" readonly="@(Model.Id > 0)" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Telefone"></label> <span class="text-danger">*</span>
+        <input asp-for="Telefone" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-success">
+        Salvar
+    </button>
+</form>
+<script>
+
+    $(document).off("submit", "#formPaciente").on("submit", "#formPaciente", function (e) {
+        e.preventDefault();
+        var form = $(this);
+        $("#alertPaciente").addClass("d-none");
+
+        $.post(form.attr("action"), form.serialize(), function (response) {
+            if (response.sucesso) {
+                location.reload();
+            } else {
+                $("#alertPaciente").removeClass("d-none");
+                $("#msgPaciente").text(response.mensagem);
+            }
+        }).fail(function() {
+            alert("Erro ao processar a requisição.");
+        });
+    });
+</script>
+
+<partial name="_ValidationScriptsPartial" />
