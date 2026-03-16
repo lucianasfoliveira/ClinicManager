@@ -22,15 +22,35 @@ namespace ClinicManager.Infra.Repositories
             return _connection.Query<Paciente>(sql);
         }
 
+        public Paciente ObterPorId(int id)
+        {
+            var sql = @"SELECT ID, NOME, CPF, DTNASCIMENTO, TELEFONE, EMAIL, DTCADASTRO
+                        FROM PACIENTE
+                        WHERE ID = @ID";
+
+            return _connection.QueryFirstOrDefault<Paciente>(sql, new { ID = id });
+        }
+
         public void IncluiPaciente(Paciente paciente)
         {
-            var sql = @"INSERT INTO Paciente
-                    (NOME, CPF, DTNASCIMENTO, TELEFONE, EMAIL, DTCADASTRO)
-                    VALUES
-                    (@NOME, @CPF, @DTNASCIMENTO, @TELEFONE, @EMAIL, @DTCADASTRO)";
+            var sql = @"INSERT INTO PACIENTE
+                        (NOME, CPF, DTNASCIMENTO, TELEFONE, EMAIL, DTCADASTRO)
+                        VALUES
+                        (@NOME, @CPF, @DTNASCIMENTO, @TELEFONE, @EMAIL, @DTCADASTRO)";
 
             _connection.Execute(sql, paciente);
         }
 
+        public void AlteraPaciente(Paciente paciente)
+        {
+            var sql = @"UPDATE PACIENTE
+                        SET
+                            DTNASCIMENTO = @DTNASCIMENTO,
+                            TELEFONE = @TELEFONE,
+                            EMAIL = @EMAIL
+                        WHERE ID = @ID";
+
+            _connection.Execute(sql, paciente);
+        }
     }
 }

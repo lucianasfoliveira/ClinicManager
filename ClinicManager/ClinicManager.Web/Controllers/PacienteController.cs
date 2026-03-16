@@ -22,7 +22,14 @@ namespace ClinicManager.Web.Controllers
         [HttpGet]
         public IActionResult IncluiPaciente()
         {
-            return PartialView("_IncluiPaciente");
+            return PartialView("_PacienteForm", new PacienteViewModel());
+        }
+
+        public IActionResult AlteraPaciente(int id)
+        {
+            var paciente = _pacienteAppService.ObterPorId(id);
+
+            return PartialView("_PacienteForm", paciente);
         }
 
         [HttpPost]
@@ -34,6 +41,22 @@ namespace ClinicManager.Web.Controllers
             string msg;
 
             var ok = _pacienteAppService.IncluiPaciente(model, out msg);
+
+            if (!ok)
+                return Json(new { sucesso = false, mensagem = msg });
+
+            return Json(new { sucesso = true });
+        }
+
+        [HttpPost]
+        public IActionResult SalvarAlteraPaciente(PacienteViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return Json(new { sucesso = false, mensagem = "Preencha os campos obrigatórios." });
+
+            string msg;
+
+            var ok = _pacienteAppService.AlteraPaciente(model, out msg);
 
             if (!ok)
                 return Json(new { sucesso = false, mensagem = msg });

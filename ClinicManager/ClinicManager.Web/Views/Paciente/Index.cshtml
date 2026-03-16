@@ -19,6 +19,7 @@
             <th>Ações</th>
         </tr>
     </thead>
+
     <tbody>
         @foreach (var paciente in Model)
         {
@@ -27,39 +28,64 @@
                 <td>@paciente.Nome</td>
                 <td>@paciente.CPF</td>
                 <td>@paciente.DtNascimento.ToString("dd/MM/yyyy")</td>
-                <td>@paciente.Idade anos</td>
                 <td>@paciente.Telefone</td>
                 <td>@paciente.Email</td>
-                <td>@paciente.DtCadastro</td>
+                <td>@paciente.DtCadastro.ToString("dd/MM/yyyy")</td>
+
                 <td>
-                    @* Dropdown de ações *@
                     <div class="dropdown">
-                        <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton-@paciente.Id" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button class="btn btn-sm btn-secondary dropdown-toggle"
+                                type="button"
+                                data-bs-toggle="dropdown">
+
                             <i class="bi bi-three-dots-vertical"></i>
                         </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton-@paciente.Id">
-                            <li><a class="dropdown-item" href="#">Editar</a></li>
-                            <li><a class="dropdown-item" href="#">Excluir</a></li>
+
+                        <ul class="dropdown-menu">
+
+                            <li>
+                                <a class="dropdown-item btnEditarPaciente"
+                                   data-id="@paciente.Id"
+                                   href="#">
+                                    Editar
+                                </a>
+                            </li>
+
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    Excluir
+                                </a>
+                            </li>
+
                         </ul>
                     </div>
                 </td>
+
             </tr>
         }
     </tbody>
 </table>
 
-<div class="modal fade" id="modalFormPaciente" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="modalFormPaciente" tabindex="-1">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
+
             <div class="modal-header">
-                <h5 class="modal-title">Incluir Paciente</h5>
+                <h5 class="modal-title">Paciente</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
+
             <div class="modal-body" id="conteudoModal">
             </div>
+
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal">
+                    Cancelar
+                </button>
             </div>
+
         </div>
     </div>
 </div>
@@ -73,6 +99,25 @@
             $.get("/Paciente/IncluiPaciente", function (data) {
 
                 $("#conteudoModal").html(data);
+
+                $(".modal-title").text("Novo Paciente");
+
+                var modal = new bootstrap.Modal(document.getElementById('modalFormPaciente'));
+                modal.show();
+
+            });
+
+        });
+
+        $(document).on("click", ".btnEditarPaciente", function () {
+
+            var id = $(this).data("id");
+
+            $.get("/Paciente/AlteraPaciente", { id: id }, function (data) {
+
+                $("#conteudoModal").html(data);
+
+                $(".modal-title").text("Alterar Paciente");
 
                 var modal = new bootstrap.Modal(document.getElementById('modalFormPaciente'));
                 modal.show();

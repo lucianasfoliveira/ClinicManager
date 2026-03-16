@@ -23,6 +23,12 @@ namespace ClinicManager.Application.AppService
             var pacientes = _pacienteService.ListarTodos();
             return _mapper.Map<IEnumerable<PacienteViewModel>>(pacientes);
         }
+        public PacienteViewModel ObterPorId(int id)
+        {
+            var paciente = _pacienteService.ObterPorId(id);
+
+            return _mapper.Map<PacienteViewModel>(paciente);
+        }
 
         public bool IncluiPaciente(PacienteViewModel model, out string msg)
         {
@@ -42,6 +48,11 @@ namespace ClinicManager.Application.AppService
             msg = "";
             return true;
         }
+        public bool AlteraPaciente(PacienteViewModel model, out string msg)
+        {
+            var paciente = _mapper.Map<Paciente>(model);
 
+            return _pacienteService.AlteraPaciente(paciente, out msg);
+        }
     }
 }

@@ -5,12 +5,15 @@
     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
 </div>
 
-<form id="formPaciente" asp-action="SalvarPaciente" method="post">
+<form id="formPaciente" asp-action="@(Model.Id == 0 ? "SalvarPaciente" : "SalvarAlteraPaciente")" method="post">
+
+    <input type="hidden" asp-for="Id" />
+
     <div asp-validation-summary="All" class="text-danger"></div>
 
     <div class="mb-3">
         <label asp-for="Nome"></label> <span class="text-danger">*</span>
-        <input asp-for="Nome" class="form-control" />
+        <input asp-for="Nome" class="form-control" readonly="@(Model.Id > 0)" />
     </div>
 
     <div class="mb-3">
@@ -20,7 +23,7 @@
 
     <div class="mb-3">
         <label asp-for="CPF"></label> <span class="text-danger">*</span>
-        <input asp-for="CPF" class="form-control" />
+        <input asp-for="CPF" class="form-control" readonly="@(Model.Id > 0)" />
     </div>
 
     <div class="mb-3">
@@ -29,16 +32,16 @@
     </div>
 
     <div class="mb-3">
-        <label asp-for="Email"></label> <span class="text-danger"></span>
+        <label asp-for="Email"></label>
         <input asp-for="Email" class="form-control" />
     </div>
-
 
     <button type="submit" class="btn btn-success">
         Salvar
     </button>
 
 </form>
+
 <script>
 
     $(document).on("submit", "#formPaciente", function (e) {
@@ -47,7 +50,6 @@
 
         var form = $(this);
 
-        // esconde alerta anterior
         $("#alertPaciente").addClass("d-none");
 
         $.post(form.attr("action"), form.serialize(), function (response) {
