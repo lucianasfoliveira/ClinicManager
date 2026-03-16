@@ -9,6 +9,6 @@ namespace ClinicManager.Application.Interfaces.Service
         void IncluiPaciente(Paciente paciente);
         bool AlteraPaciente(Paciente paciente, out string msg);
         bool ExistePaciente(string cpf);
-
+        void ExcluirPaciente(int id);
     }
 }

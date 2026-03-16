@@ -48,11 +48,21 @@ namespace ClinicManager.Application.AppService
             msg = "";
             return true;
         }
+
         public bool AlteraPaciente(PacienteViewModel model, out string msg)
         {
             var paciente = _mapper.Map<Paciente>(model);
 
             return _pacienteService.AlteraPaciente(paciente, out msg);
+        }
+
+        public bool ExcluirPaciente(int id, out string msg)
+        {
+            msg = "";
+
+            _pacienteService.ExcluirPaciente(id);
+
+            return true;
         }
     }
 }

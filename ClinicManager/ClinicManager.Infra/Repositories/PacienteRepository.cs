@@ -52,5 +52,12 @@ namespace ClinicManager.Infra.Repositories
 
             _connection.Execute(sql, paciente);
         }
+        public void ExcluirPaciente(int id)
+        {
+            var sql = @"DELETE FROM PACIENTE
+                WHERE ID = @ID";
+
+            _connection.Execute(sql, new { ID = id });
+        }
     }
 }

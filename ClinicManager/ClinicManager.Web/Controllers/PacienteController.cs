@@ -64,5 +64,18 @@ namespace ClinicManager.Web.Controllers
             return Json(new { sucesso = true });
         }
 
+        [HttpPost]
+        public IActionResult ExcluirPaciente(int id)
+        {
+            string msg;
+
+            var ok = _pacienteAppService.ExcluirPaciente(id, out msg);
+
+            if (!ok)
+                return Json(new { sucesso = false, mensagem = msg });
+
+            return Json(new { sucesso = true });
+        }
+
     }
 }

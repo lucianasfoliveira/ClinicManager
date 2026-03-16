@@ -9,5 +9,6 @@ namespace ClinicManager.Application.Interfaces.AppService
         PacienteViewModel ObterPorId(int id);
         bool IncluiPaciente(PacienteViewModel model, out string msg);
         bool AlteraPaciente(PacienteViewModel model, out string msg);
+        bool ExcluirPaciente(int id, out string msg);
     }
 }

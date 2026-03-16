@@ -51,5 +51,9 @@ namespace ClinicManager.Application.Service
 
             return pacientes.Any(p => p.CPF == cpf);
         }
+        public void ExcluirPaciente(int id)
+        {
+            _pacienteRepository.ExcluirPaciente(id);
+        }
     }
 }

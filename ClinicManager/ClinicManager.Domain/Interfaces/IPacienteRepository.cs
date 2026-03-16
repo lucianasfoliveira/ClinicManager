@@ -10,5 +10,6 @@ namespace ClinicManager.Domain.Interfaces
         Paciente ObterPorId(int id);
         void IncluiPaciente(Paciente paciente);
         void AlteraPaciente(Paciente paciente);
+        void ExcluirPaciente(int id);
     }
 }
