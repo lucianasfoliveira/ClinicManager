@@ -33,46 +33,25 @@ namespace ClinicManager.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult SalvarPaciente(PacienteViewModel model)
+        public IActionResult Salvar(PacienteViewModel model)
         {
             if (!ModelState.IsValid)
-                return Json(new { sucesso = false, mensagem = "Preencha os campos obrigatórios." });
+                return Json(new { sucesso = false, mensagem = "Verifique os dados preenchidos." });
 
-            string msg;
+            var resultado = model.Id == 0
+                ? _pacienteAppService.IncluiPaciente(model)
+                : _pacienteAppService.AlteraPaciente(model);
 
-            var ok = _pacienteAppService.IncluiPaciente(model, out msg);
-
-            if (!ok)
-                return Json(new { sucesso = false, mensagem = msg });
-
-            return Json(new { sucesso = true });
-        }
-
-        [HttpPost]
-        public IActionResult SalvarAlteraPaciente(PacienteViewModel model)
-        {
-            if (!ModelState.IsValid)
-                return Json(new { sucesso = false, mensagem = "Preencha os campos obrigatórios." });
-
-            string msg;
-
-            var ok = _pacienteAppService.AlteraPaciente(model, out msg);
-
-            if (!ok)
-                return Json(new { sucesso = false, mensagem = msg });
-
-            return Json(new { sucesso = true });
+            return Json(new { sucesso = resultado.Sucesso, mensagem = resultado.Mensagem });
         }
 
         [HttpPost]
         public IActionResult ExcluirPaciente(int id)
         {
-            string msg;
+            var resultado = _pacienteAppService.ExcluirPaciente(id);
 
-            var ok = _pacienteAppService.ExcluirPaciente(id, out msg);
-
-            if (!ok)
-                return Json(new { sucesso = false, mensagem = msg });
+            if (!resultado.Sucesso)
+                return Json(new { sucesso = false, mensagem = resultado.Mensagem });
 
             return Json(new { sucesso = true });
         }

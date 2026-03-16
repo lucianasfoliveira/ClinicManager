@@ -1,4 +1,5 @@
 ﻿using ClinicManager.Application.Interfaces.Service;
+using ClinicManager.Domain.Core;
 using ClinicManager.Domain.Entities;
 using ClinicManager.Domain.Interfaces;
 
@@ -22,27 +23,25 @@ namespace ClinicManager.Application.Service
             return _pacienteRepository.ObterPorId(id);
         }
 
-        public void IncluiPaciente(Paciente paciente)
+        public RequestResult IncluiPaciente(Paciente paciente)
         {
+            if (_pacienteRepository.ExisteCpf(paciente.CPF))
+                return RequestResult.Erro("Já existe um paciente cadastrado com este CPF.");
+
+            paciente.DTCADASTRO = DateTime.Now;
             _pacienteRepository.IncluiPaciente(paciente);
+            return RequestResult.Ok();
         }
-        public bool AlteraPaciente(Paciente paciente, out string msg)
+
+        public RequestResult AlteraPaciente(Paciente paciente)
         {
-            msg = "";
-
-            var existente = _pacienteRepository.ObterPorId(paciente.ID);
-
-            if (existente == null)
+            if (_pacienteRepository.ExisteCpf(paciente.CPF, paciente.ID))
             {
-                msg = "Paciente não encontrado.";
-                return false;
+                return RequestResult.Erro("Este CPF já está cadastrado para outro paciente.");
             }
 
             _pacienteRepository.AlteraPaciente(paciente);
-
-            msg = "";
-
-            return true;
+            return RequestResult.Ok();
         }
 
         public bool ExistePaciente(string cpf)

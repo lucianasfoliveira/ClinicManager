@@ -1,4 +1,5 @@
-﻿using ClinicManager.Domain.Entities;
+﻿using ClinicManager.Domain.Core;
+using ClinicManager.Domain.Entities;
 
 namespace ClinicManager.Application.Interfaces.Service
 {
@@ -6,9 +7,8 @@ namespace ClinicManager.Application.Interfaces.Service
     {
         IEnumerable<Paciente> ListarTodos();
         Paciente ObterPorId(int id);
-        void IncluiPaciente(Paciente paciente);
-        bool AlteraPaciente(Paciente paciente, out string msg);
-        bool ExistePaciente(string cpf);
+        RequestResult IncluiPaciente(Paciente paciente);
+        RequestResult AlteraPaciente(Paciente paciente);
         void ExcluirPaciente(int id);
     }
 }

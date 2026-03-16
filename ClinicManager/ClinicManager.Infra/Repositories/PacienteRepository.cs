@@ -31,6 +31,12 @@ namespace ClinicManager.Infra.Repositories
             return _connection.QueryFirstOrDefault<Paciente>(sql, new { ID = id });
         }
 
+        public bool ExisteCpf(string cpf, int idAtual)
+        {
+            var sql = "SELECT COUNT(1) FROM PACIENTE WHERE CPF = @CPF AND ID <> @ID";
+            return _connection.ExecuteScalar<int>(sql, new { CPF = cpf, ID = idAtual }) > 0;
+        }
+
         public void IncluiPaciente(Paciente paciente)
         {
             var sql = @"INSERT INTO PACIENTE
@@ -52,6 +58,7 @@ namespace ClinicManager.Infra.Repositories
 
             _connection.Execute(sql, paciente);
         }
+
         public void ExcluirPaciente(int id)
         {
             var sql = @"DELETE FROM PACIENTE

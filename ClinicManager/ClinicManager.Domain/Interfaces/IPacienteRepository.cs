@@ -8,6 +8,7 @@ namespace ClinicManager.Domain.Interfaces
     {
         IEnumerable<Paciente> ListarTodos();
         Paciente ObterPorId(int id);
+        bool ExisteCpf(string cpf, int idAtual);
         void IncluiPaciente(Paciente paciente);
         void AlteraPaciente(Paciente paciente);
         void ExcluirPaciente(int id);

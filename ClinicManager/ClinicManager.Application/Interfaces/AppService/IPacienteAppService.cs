@@ -1,4 +1,5 @@
 ﻿using ClinicManager.Application.ViewModel;
+using ClinicManager.Domain.Core;
 using System;
 
 namespace ClinicManager.Application.Interfaces.AppService
@@ -7,8 +8,8 @@ namespace ClinicManager.Application.Interfaces.AppService
     {
         IEnumerable<PacienteViewModel> ListarTodos();
         PacienteViewModel ObterPorId(int id);
-        bool IncluiPaciente(PacienteViewModel model, out string msg);
-        bool AlteraPaciente(PacienteViewModel model, out string msg);
-        bool ExcluirPaciente(int id, out string msg);
+        RequestResult IncluiPaciente(PacienteViewModel model); 
+        RequestResult AlteraPaciente(PacienteViewModel model); 
+        RequestResult ExcluirPaciente(int id);
     }
 }
