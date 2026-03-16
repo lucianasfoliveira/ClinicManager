@@ -24,12 +24,24 @@ namespace ClinicManager.Application.AppService
             return _mapper.Map<IEnumerable<PacienteViewModel>>(pacientes);
         }
 
-        public void IncluiPaciente(PacienteViewModel model)
+        public bool IncluiPaciente(PacienteViewModel model, out string msg)
         {
-            var paciente = _mapper.Map<Paciente>(model);
+            msg = "";
 
+            if (_pacienteService.ExistePaciente(model.CPF))
+            {
+                msg = "Já existe um paciente cadastrado com este Nome ou CPF.";
+                return false;
+            }
+
+            var paciente = _mapper.Map<Paciente>(model);
             paciente.DTCADASTRO = DateTime.Now;
+
             _pacienteService.IncluiPaciente(paciente);
+
+            msg = "";
+            return true;
         }
+
     }
 }

@@ -11,16 +11,19 @@ namespace ClinicManager.Application.ViewModel
     {
         public int Id { get; set; }
 
+        [Required(ErrorMessage = "O nome é obrigatório.")]
         public string Nome { get; set; }
 
-        public string CPF { get; set; }
-
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [Required(ErrorMessage = "A data de nascimento é obrigatória.")]
         public DateTime DtNascimento { get; set; }
 
+        [Required(ErrorMessage = "O CPF é obrigatório.")]
+        public string CPF { get; set; }
+
+        [Required(ErrorMessage = "O telefone é obrigatório.")]
         public string Telefone { get; set; }
 
+        [EmailAddress(ErrorMessage = "Informe um email válido.")]
         public string Email { get; set; }
 
         public DateTime DtCadastro { get; set; }

@@ -6,5 +6,6 @@ namespace ClinicManager.Application.Interfaces.Service
     {
         IEnumerable<Paciente> ListarTodos();
         void IncluiPaciente(Paciente paciente);
+        bool ExistePaciente(string cpf);
     }
 }

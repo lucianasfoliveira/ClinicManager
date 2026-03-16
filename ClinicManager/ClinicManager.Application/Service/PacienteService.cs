@@ -22,5 +22,11 @@ namespace ClinicManager.Application.Service
         {
             _pacienteRepository.IncluiPaciente(paciente);
         }
+        public bool ExistePaciente(string cpf)
+        {
+            var pacientes = _pacienteRepository.ListarTodos();
+
+            return pacientes.Any(p => p.CPF == cpf);
+        }
     }
 }

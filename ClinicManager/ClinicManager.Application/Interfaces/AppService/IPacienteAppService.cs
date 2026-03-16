@@ -6,6 +6,6 @@ namespace ClinicManager.Application.Interfaces.AppService
     public interface IPacienteAppService
     {
         IEnumerable<PacienteViewModel> ListarTodos();
-        void IncluiPaciente(PacienteViewModel model);
+        bool IncluiPaciente(PacienteViewModel model, out string msg);
     }
 }

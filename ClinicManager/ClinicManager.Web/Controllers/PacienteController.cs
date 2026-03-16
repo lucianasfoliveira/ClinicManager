@@ -29,11 +29,17 @@ namespace ClinicManager.Web.Controllers
         public IActionResult SalvarPaciente(PacienteViewModel model)
         {
             if (!ModelState.IsValid)
-                return PartialView("_IncluiPaciente", model);
+                return Json(new { sucesso = false, mensagem = "Preencha os campos obrigatórios." });
 
-            _pacienteAppService.IncluiPaciente(model);
+            string msg;
 
-            return RedirectToAction("Index");
+            var ok = _pacienteAppService.IncluiPaciente(model, out msg);
+
+            if (!ok)
+                return Json(new { sucesso = false, mensagem = msg });
+
+            return Json(new { sucesso = true });
         }
+
     }
 }
