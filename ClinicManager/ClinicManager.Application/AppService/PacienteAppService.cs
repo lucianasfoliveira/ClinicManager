@@ -30,7 +30,7 @@ namespace ClinicManager.Application.AppService
 
             if (_pacienteService.ExistePaciente(model.CPF))
             {
-                msg = "Já existe um paciente cadastrado com este Nome ou CPF.";
+                msg = "Já existe um paciente cadastrado com este CPF.";
                 return false;
             }
 

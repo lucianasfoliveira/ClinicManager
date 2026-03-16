@@ -18,7 +18,7 @@ namespace ClinicManager.Domain.Entities
 
         public string TELEFONE { get; set; }
 
-        public string EMAIL { get; set; }
+        public string? EMAIL { get; set; }
 
         public DateTime DTCADASTRO { get; set; }
     }

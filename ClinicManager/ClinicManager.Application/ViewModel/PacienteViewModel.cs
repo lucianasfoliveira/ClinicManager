@@ -23,8 +23,7 @@ namespace ClinicManager.Application.ViewModel
         [Required(ErrorMessage = "O telefone é obrigatório.")]
         public string Telefone { get; set; }
 
-        [EmailAddress(ErrorMessage = "Informe um email válido.")]
-        public string Email { get; set; }
+        public string? Email { get; set; }
 
         public DateTime DtCadastro { get; set; }
         public int Idade
