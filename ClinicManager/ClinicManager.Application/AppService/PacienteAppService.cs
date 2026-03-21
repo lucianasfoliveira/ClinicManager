@@ -19,19 +19,19 @@ namespace ClinicManager.Application.AppService
             _mapper = mapper;
         }
 
-        public RequestResult SalvarPaciente(PacienteViewModel model)
+        public RequestResult Salvar(PacienteViewModel model)
         {
             var paciente = _mapper.Map<Paciente>(model);
 
             if (model.Id == 0)
-                return _pacienteService.IncluiPaciente(paciente);
+                return _pacienteService.Inclui(paciente);
 
-            return _pacienteService.AlteraPaciente(paciente);
+            return _pacienteService.Altera(paciente);
         }
 
-        public RequestResult ExcluirPaciente(int id)
+        public RequestResult Excluir(int id)
         {
-            _pacienteService.ExcluirPaciente(id);
+            _pacienteService.Excluir(id);
             return RequestResult.Ok();
         }
 

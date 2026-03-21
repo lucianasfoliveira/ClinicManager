@@ -99,7 +99,7 @@
 
         $(document).on("click", "#btnIncluiPaciente", function () {
 
-            $.get("/Paciente/IncluiPaciente", function (data) {
+            $.get("/Paciente/Inclui", function (data) {
 
                 $("#conteudoModal").html(data);
 
@@ -116,7 +116,7 @@
 
             var id = $(this).data("id");
 
-            $.get("/Paciente/AlteraPaciente", { id: id }, function (data) {
+            $.get("/Paciente/Altera", { id: id }, function (data) {
 
                 $("#conteudoModal").html(data);
 
@@ -136,7 +136,7 @@
             if (!confirm("Deseja realmente excluir este paciente?"))
                 return;
 
-            $.post("/Paciente/ExcluirPaciente", { id: id }, function (response) {
+            $.post("/Paciente/Excluir", { id: id }, function (response) {
 
                 if (response.sucesso) {
 

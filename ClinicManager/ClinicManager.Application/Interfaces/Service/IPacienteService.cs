@@ -7,8 +7,8 @@ namespace ClinicManager.Application.Interfaces.Service
     {
         IEnumerable<Paciente> ListarTodos();
         Paciente ObterPorId(int id);
-        RequestResult IncluiPaciente(Paciente paciente);
-        RequestResult AlteraPaciente(Paciente paciente);
-        void ExcluirPaciente(int id);
+        RequestResult Inclui(Paciente paciente);
+        RequestResult Altera(Paciente paciente);
+        void Excluir(int id);
     }
 }
