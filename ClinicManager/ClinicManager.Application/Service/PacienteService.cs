@@ -53,13 +53,18 @@ namespace ClinicManager.Application.Service
             return RequestResult.Ok();
         }
 
-        private RequestResult ValidarDataNascimento(DateTime data)
+        private RequestResult ValidarDataNascimento(DateTime? data)
         {
-            if (data > DateTime.Now)
+            if (!data.HasValue)
+                return RequestResult.Erro("A data de nascimento é obrigatória.");
+
+            var hoje = DateTime.Today;
+
+            if (data > hoje)
                 return RequestResult.Erro("A data de nascimento não pode ser no futuro.");
 
-            if (data < new DateTime(1900, 1, 1))
-                return RequestResult.Erro("Data de nascimento inválida (mínimo ano 1900).");
+            if (data < new DateTime(1910, 1, 1))
+                return RequestResult.Erro("Data de nascimento inválida (mínimo 01/01/1910).");
 
             return RequestResult.Ok();
         }
