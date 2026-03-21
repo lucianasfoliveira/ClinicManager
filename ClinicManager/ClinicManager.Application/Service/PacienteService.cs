@@ -26,25 +26,30 @@ namespace ClinicManager.Application.Service
         public RequestResult IncluiPaciente(Paciente paciente)
         {
             var resultadoData = ValidarDataNascimento(paciente.DtNascimento);
-            if (!resultadoData.Sucesso) return resultadoData;
+            if (!resultadoData.Sucesso)
+                return resultadoData;
 
             if (_pacienteRepository.ExisteCpf(paciente.Cpf))
-                return RequestResult.Erro("Já existe um paciente cadastrado com este CPF.");
+                return RequestResult.Erro("Já existe um paciente com este CPF.");
 
             paciente.DtCadastro = DateTime.Now;
+
             _pacienteRepository.IncluiPaciente(paciente);
+
             return RequestResult.Ok();
         }
 
         public RequestResult AlteraPaciente(Paciente paciente)
         {
             var resultadoData = ValidarDataNascimento(paciente.DtNascimento);
-            if (!resultadoData.Sucesso) return resultadoData;
+            if (!resultadoData.Sucesso)
+                return resultadoData;
 
             if (_pacienteRepository.ExisteCpf(paciente.Cpf, paciente.Id))
-                return RequestResult.Erro("O CPF informado já pertence a outro paciente.");
+                return RequestResult.Erro("CPF já pertence a outro paciente.");
 
             _pacienteRepository.AlteraPaciente(paciente);
+
             return RequestResult.Ok();
         }
 
@@ -59,12 +64,6 @@ namespace ClinicManager.Application.Service
             return RequestResult.Ok();
         }
 
-        public bool ExistePaciente(string cpf)
-        {
-            var pacientes = _pacienteRepository.ListarTodos();
-
-            return pacientes.Any(p => p.Cpf == cpf);
-        }
         public void ExcluirPaciente(int id)
         {
             _pacienteRepository.ExcluirPaciente(id);

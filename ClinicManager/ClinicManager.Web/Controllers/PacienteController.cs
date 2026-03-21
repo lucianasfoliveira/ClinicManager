@@ -33,14 +33,12 @@ namespace ClinicManager.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Salvar(PacienteViewModel model)
+        public IActionResult SalvarPaciente(PacienteViewModel model)
         {
             if (!ModelState.IsValid)
                 return Json(new { sucesso = false, mensagem = "Verifique os dados preenchidos." });
 
-            var resultado = model.Id == 0
-                ? _pacienteAppService.IncluiPaciente(model)
-                : _pacienteAppService.AlteraPaciente(model);
+            var resultado = _pacienteAppService.SalvarPaciente(model);
 
             return Json(new { sucesso = resultado.Sucesso, mensagem = resultado.Mensagem });
         }

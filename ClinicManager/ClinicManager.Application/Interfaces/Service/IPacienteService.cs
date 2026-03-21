@@ -9,7 +9,6 @@ namespace ClinicManager.Application.Interfaces.Service
         Paciente ObterPorId(int id);
         RequestResult IncluiPaciente(Paciente paciente);
         RequestResult AlteraPaciente(Paciente paciente);
-        bool ExistePaciente(string cpf);
         void ExcluirPaciente(int id);
     }
 }

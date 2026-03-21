@@ -8,7 +8,6 @@ using ClinicManager.Domain.Entities;
 
 namespace ClinicManager.Application.AppService
 {
-    // Local: ClinicManager.Application.AppService
     public class PacienteAppService : IPacienteAppService
     {
         private readonly IPacienteService _pacienteService;
@@ -20,15 +19,13 @@ namespace ClinicManager.Application.AppService
             _mapper = mapper;
         }
 
-        public RequestResult IncluiPaciente(PacienteViewModel model)
+        public RequestResult SalvarPaciente(PacienteViewModel model)
         {
             var paciente = _mapper.Map<Paciente>(model);
-            return _pacienteService.IncluiPaciente(paciente);
-        }
 
-        public RequestResult AlteraPaciente(PacienteViewModel model)
-        {
-            var paciente = _mapper.Map<Paciente>(model);
+            if (model.Id == 0)
+                return _pacienteService.IncluiPaciente(paciente);
+
             return _pacienteService.AlteraPaciente(paciente);
         }
 

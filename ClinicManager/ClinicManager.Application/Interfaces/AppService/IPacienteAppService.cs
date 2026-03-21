@@ -8,8 +8,9 @@ namespace ClinicManager.Application.Interfaces.AppService
     {
         IEnumerable<PacienteViewModel> ListarTodos();
         PacienteViewModel ObterPorId(int id);
-        RequestResult IncluiPaciente(PacienteViewModel model); 
-        RequestResult AlteraPaciente(PacienteViewModel model); 
+
+        public RequestResult SalvarPaciente(PacienteViewModel model);
+
         RequestResult ExcluirPaciente(int id);
     }
 }
