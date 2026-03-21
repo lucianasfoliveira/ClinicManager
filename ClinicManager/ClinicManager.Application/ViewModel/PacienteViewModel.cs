@@ -12,20 +12,28 @@ namespace ClinicManager.Application.ViewModel
         public int Id { get; set; }
 
         [Required(ErrorMessage = "O nome é obrigatório.")]
+        [Display(Name = "Nome")]
         public string Nome { get; set; }
 
         [Required(ErrorMessage = "A data de nascimento é obrigatória.")]
+        [Display(Name = "Data de Nascimento")]
         public DateTime DtNascimento { get; set; }
 
         [Required(ErrorMessage = "O CPF é obrigatório.")]
-        public string CPF { get; set; }
+        [Display(Name = "CPF")]
+        public string Cpf { get; set; }
 
         [Required(ErrorMessage = "O telefone é obrigatório.")]
+        [Display(Name = "Telefone")]
         public string Telefone { get; set; }
 
+        [Display(Name = "Email")]
         public string? Email { get; set; }
 
+        [Display(Name = "Data de Cadastro")]
         public DateTime DtCadastro { get; set; }
+
+        [Display(Name = "Idade")]
         public int Idade
         {
             get
@@ -39,6 +47,5 @@ namespace ClinicManager.Application.ViewModel
                 return idade;
             }
         }
-
     }
 }

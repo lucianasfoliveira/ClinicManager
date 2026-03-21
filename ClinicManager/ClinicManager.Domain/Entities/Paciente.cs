@@ -8,18 +8,18 @@ namespace ClinicManager.Domain.Entities
 {
     public class Paciente
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
 
-        public string NOME { get; set; }
+        public string Nome { get; set; }
 
-        public string CPF { get; set; }
+        public string Cpf { get; set; }
 
-        public DateTime DTNASCIMENTO { get; set; }
+        public DateTime DtNascimento { get; set; }
 
-        public string TELEFONE { get; set; }
+        public string Telefone { get; set; }
 
-        public string? EMAIL { get; set; }
+        public string? Email { get; set; }
 
-        public DateTime DTCADASTRO { get; set; }
+        public DateTime DtCadastro { get; set; }
     }
 }
