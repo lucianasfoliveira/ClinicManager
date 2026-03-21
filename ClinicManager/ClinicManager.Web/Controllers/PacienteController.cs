@@ -20,12 +20,12 @@ namespace ClinicManager.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult IncluiPaciente()
+        public IActionResult Inclui()
         {
             return PartialView("_PacienteForm", new PacienteViewModel());
         }
 
-        public IActionResult AlteraPaciente(int id)
+        public IActionResult Altera(int id)
         {
             var paciente = _pacienteAppService.ObterPorId(id);
 
@@ -38,17 +38,15 @@ namespace ClinicManager.Web.Controllers
             if (!ModelState.IsValid)
                 return Json(new { sucesso = false, mensagem = "Verifique os dados preenchidos." });
 
-            var resultado = model.Id == 0
-                ? _pacienteAppService.IncluiPaciente(model)
-                : _pacienteAppService.AlteraPaciente(model);
+            var resultado = _pacienteAppService.Salvar(model);
 
             return Json(new { sucesso = resultado.Sucesso, mensagem = resultado.Mensagem });
         }
 
         [HttpPost]
-        public IActionResult ExcluirPaciente(int id)
+        public IActionResult Excluir(int id)
         {
-            var resultado = _pacienteAppService.ExcluirPaciente(id);
+            var resultado = _pacienteAppService.Excluir(id);
 
             if (!resultado.Sucesso)
                 return Json(new { sucesso = false, mensagem = resultado.Mensagem });

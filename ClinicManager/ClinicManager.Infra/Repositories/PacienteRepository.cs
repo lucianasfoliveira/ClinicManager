@@ -41,7 +41,7 @@ namespace ClinicManager.Infra.Repositories
             return _connection.ExecuteScalar<int>(sql, new { CPF = cpf, ID = idAtual }) > 0;
         }
 
-        public void IncluiPaciente(Paciente paciente)
+        public void Inclui(Paciente paciente)
         {
             var sql = @"INSERT INTO PACIENTE
                         (NOME, CPF, DTNASCIMENTO, TELEFONE, EMAIL, DTCADASTRO)
@@ -51,7 +51,7 @@ namespace ClinicManager.Infra.Repositories
             _connection.Execute(sql, paciente);
         }
 
-        public void AlteraPaciente(Paciente paciente)
+        public void Altera(Paciente paciente)
         {
             var sql = @"UPDATE PACIENTE
                         SET
@@ -63,7 +63,7 @@ namespace ClinicManager.Infra.Repositories
             _connection.Execute(sql, paciente);
         }
 
-        public void ExcluirPaciente(int id)
+        public void Excluir(int id)
         {
             var sql = @"DELETE FROM PACIENTE
                 WHERE ID = @ID";

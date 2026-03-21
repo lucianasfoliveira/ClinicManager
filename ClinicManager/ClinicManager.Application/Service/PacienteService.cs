@@ -23,51 +23,55 @@ namespace ClinicManager.Application.Service
             return _pacienteRepository.ObterPorId(id);
         }
 
-        public RequestResult IncluiPaciente(Paciente paciente)
+        public RequestResult Inclui(Paciente paciente)
         {
-            var resultadoData = ValidarDataNascimento(paciente.DTNASCIMENTO);
-            if (!resultadoData.Sucesso) return resultadoData;
+            var resultadoData = ValidarDataNascimento(paciente.DtNascimento);
+            if (!resultadoData.Sucesso)
+                return resultadoData;
 
-            if (_pacienteRepository.ExisteCpf(paciente.CPF))
-                return RequestResult.Erro("Já existe um paciente cadastrado com este CPF.");
+            if (_pacienteRepository.ExisteCpf(paciente.Cpf))
+                return RequestResult.Erro("Já existe um paciente com este CPF.");
 
-            paciente.DTCADASTRO = DateTime.Now;
-            _pacienteRepository.IncluiPaciente(paciente);
+            paciente.DtCadastro = DateTime.Now;
+
+            _pacienteRepository.Inclui(paciente);
+
             return RequestResult.Ok();
         }
 
-        public RequestResult AlteraPaciente(Paciente paciente)
+        public RequestResult Altera(Paciente paciente)
         {
-            var resultadoData = ValidarDataNascimento(paciente.DTNASCIMENTO);
-            if (!resultadoData.Sucesso) return resultadoData;
+            var resultadoData = ValidarDataNascimento(paciente.DtNascimento);
+            if (!resultadoData.Sucesso)
+                return resultadoData;
 
-            if (_pacienteRepository.ExisteCpf(paciente.CPF, paciente.ID))
-                return RequestResult.Erro("O CPF informado já pertence a outro paciente.");
+            if (_pacienteRepository.ExisteCpf(paciente.Cpf, paciente.Id))
+                return RequestResult.Erro("CPF já pertence a outro paciente.");
 
-            _pacienteRepository.AlteraPaciente(paciente);
+            _pacienteRepository.Altera(paciente);
+
             return RequestResult.Ok();
         }
 
-        private RequestResult ValidarDataNascimento(DateTime data)
+        private RequestResult ValidarDataNascimento(DateTime? data)
         {
-            if (data > DateTime.Now)
+            if (!data.HasValue)
+                return RequestResult.Erro("A data de nascimento é obrigatória.");
+
+            var hoje = DateTime.Today;
+
+            if (data > hoje)
                 return RequestResult.Erro("A data de nascimento não pode ser no futuro.");
 
-            if (data < new DateTime(1900, 1, 1))
-                return RequestResult.Erro("Data de nascimento inválida (mínimo ano 1900).");
+            if (data < new DateTime(1910, 1, 1))
+                return RequestResult.Erro("Data de nascimento inválida (mínimo 01/01/1910).");
 
             return RequestResult.Ok();
         }
 
-        public bool ExistePaciente(string cpf)
+        public void Excluir(int id)
         {
-            var pacientes = _pacienteRepository.ListarTodos();
-
-            return pacientes.Any(p => p.CPF == cpf);
-        }
-        public void ExcluirPaciente(int id)
-        {
-            _pacienteRepository.ExcluirPaciente(id);
+            _pacienteRepository.Excluir(id);
         }
     }
 }
