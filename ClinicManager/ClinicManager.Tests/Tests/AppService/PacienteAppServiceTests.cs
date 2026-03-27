@@ -1,12 +1,12 @@
-﻿using Xunit;
-using Moq;
-using FluentAssertions;
-using AutoMapper;
+﻿using AutoMapper;
 using ClinicManager.Application.AppService;
 using ClinicManager.Application.Interfaces.Service;
 using ClinicManager.Application.ViewModel;
+using ClinicManager.Domain.Core;
 using ClinicManager.Domain.Entities;
-
+using FluentAssertions;
+using Moq;
+using Xunit;
 
 namespace ClinicManager.Tests.Tests.AppService
 {
@@ -47,5 +47,62 @@ namespace ClinicManager.Tests.Tests.AppService
             resultado.First().Nome.Should().Be("Maria");
         }
 
+        [Fact]
+        public void Salvar_DeveChamarInclui_QuandoIdForZero()
+        {
+            var model = new PacienteViewModel
+            {
+                Id = 0,
+                Nome = "Maria",
+                Cpf = "123",
+                DtNascimento = new DateTime(1990, 1, 1)
+            };
+
+            _serviceMock
+                .Setup(x => x.Inclui(It.IsAny<Paciente>()))
+                .Returns(RequestResult.Ok());
+            var resultado = _appService.Salvar(model);
+
+            resultado.Sucesso.Should().BeTrue();
+
+            _serviceMock.Verify(x => x.Inclui(It.IsAny<Paciente>()), Times.Once);
+            _serviceMock.Verify(x => x.Altera(It.IsAny<Paciente>()), Times.Never);
+        }
+
+        [Fact]
+        public void Salvar_DeveChamarAltera_QuandoIdForMaiorQueZero()
+        {
+            var model = new PacienteViewModel
+            {
+                Id = 1,
+                Nome = "Maria",
+                Cpf = "123",
+                DtNascimento = new DateTime(1990, 1, 1)
+            };
+
+            _serviceMock
+                .Setup(x => x.Altera(It.IsAny<Paciente>()))
+                .Returns(RequestResult.Ok());
+            var resultado = _appService.Salvar(model);
+
+            resultado.Sucesso.Should().BeTrue();
+
+            _serviceMock.Verify(x => x.Altera(It.IsAny<Paciente>()), Times.Once);
+            _serviceMock.Verify(x => x.Inclui(It.IsAny<Paciente>()), Times.Never);
+        }
+
+        [Fact]
+        public void Excluir_DeveChamarServiceERetornarSucesso()
+        {
+            var id = 1;
+
+            _serviceMock
+                .Setup(x => x.Excluir(id));
+
+            var resultado = _appService.Excluir(id);
+
+            resultado.Sucesso.Should().BeTrue();
+            _serviceMock.Verify(x => x.Excluir(id), Times.Once);
+        }
     }
 }

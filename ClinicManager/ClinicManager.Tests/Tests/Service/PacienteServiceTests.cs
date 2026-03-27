@@ -103,5 +103,15 @@ namespace ClinicManager.Tests.Tests.Service
             resultado.Sucesso.Should().BeFalse();
             resultado.Mensagem.Should().Be("A data de nascimento é obrigatória.");
         }
+
+        [Fact]
+        public void Excluir_DeveChamarRepositorio()
+        {
+            var id = 1;
+
+            _service.Excluir(id);
+
+            _repoMock.Verify(x => x.Excluir(id), Times.Once);
+        }
     }
 }
