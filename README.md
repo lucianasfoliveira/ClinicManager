@@ -2,8 +2,6 @@
 
 O ClinicManager é um projeto desenvolvido em ASP.NET Core com o objetivo de gerenciar o cadastro de pacientes em clínicas de saúde.
 
-Este projeto foi criado como parte do meu processo de transição para a área de desenvolvimento de software, unindo mais de 15 anos de experiência na área da saúde com práticas modernas de desenvolvimento em .NET.
-
 ## Funcionalidades
 
 Atualmente o sistema possui o módulo de gestão de pacientes com as seguintes funcionalidades:
@@ -78,6 +76,30 @@ Responsável pelo acesso ao banco de dados utilizando Dapper.
 - Bootstrap
 - jQuery
 - AJAX
+- xUnit
+- Moq
+- FluentAssertions
+  
+---
+
+## Testes Automatizados
+
+O projeto inclui testes unitários para garantir que as regras de negócio e serviços funcionem corretamente.  
+
+### Testes implementados
+
+**Service**
+- Validação de CPF duplicado
+- Validação de data de nascimento (futuro, nula e limite mínimo)
+- Inclusão de paciente válido
+- Exclusão chamando o repositório
+
+**AppService**
+- Listagem de pacientes
+- Salvar paciente (inclui e altera)
+- Exclusão chamando o service
+  
+---
 
 ## Entidade Principal
 
@@ -99,11 +121,12 @@ A idade do paciente é calculada automaticamente no sistema.
 
 ### Lista de Pacientes
 
-Tela principal com listagem e ações de cadastro, edição e exclusão.
+Tela principal com listagem de pacientes e ações de cadastro, edição e exclusão.
 
 ## Roadmap
 
 - [x] CRUD completo de pacientes
+- [x] Testes unitários (Service e AppService)
 - [ ] Busca de pacientes por nome ou CPF
 - [ ] Paginação da listagem
 - [ ] Módulo de agendamento de consultas
@@ -137,6 +160,5 @@ CREATE TABLE PACIENTE (
 
 ## Sobre a Autora
 
-Sou fisioterapeuta com mais de 15 anos de experiência na área da saúde e atualmente estou em transição de carreira para desenvolvimento de software, com foco em .NET e desenvolvimento backend.
+Sou fisioterapeuta com mais de 15 anos de experiência na área da saúde e hoje sou Analista e desenvolvedora de sistemas com carreira emdesenvolvimento de software, com foco em .NET, desenvolvimento backend e qualidade.
 
-Este projeto representa a união entre conhecimento de domínio na área da saúde e boas práticas de desenvolvimento.
